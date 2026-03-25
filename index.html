@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSM Traders – Electronics Distributor</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep:  #0D2B8E;
+    --blue:       #1A4FCC;
+    --blue-lt:    #4A7AFF;
+    --blue-pale:  #E8EEFF;
+    --red:        #C81A1A;
+    --red-lt:     #EF3B3B;
+    --red-pale:   #FDEAEA;
+    --orange:     #E85C00;
+    --orange-lt:  #FF7A20;
+    --orange-pale:#FFF0E6;
+    --white:      #FFFFFF;
+    --bg:         #F4F7FF;
+    --bg2:        #FFFFFF;
+    --surface:    #EEF2FF;
+    --border:     #D8E0F8;
+    --text:       #0F1B3D;
+    --text-md:    #3A4A72;
+    --text-lt:    #6B7A9F;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: linear-gradient(90deg, var(--blue-deep), var(--blue), var(--orange), var(--blue-deep));
+    background-size: 300%;
+    animation: gradShift 8s linear infinite;
+    text-align: center; padding: 9px;
+    font-size: 12px; letter-spacing: 2px;
+    color: #fff; font-weight: 600; text-transform: uppercase;
+  }
+  @keyframes gradShift { 0%{background-position:0%} 100%{background-position:300%} }
+  .topbar span { color: #FFD580; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(14px);
+    border-bottom: 2px solid var(--border);
+    display: flex; align-items: center;
+    padding: 0 5%; gap: 24px;
+    box-shadow: 0 2px 16px rgba(13,43,142,.08);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; padding: 12px 0; text-decoration: none; }
+  .logo-placeholder {
+    width: 54px; height: 54px;
+    border: 2px dashed var(--orange); border-radius: 10px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: 8px; color: var(--orange); letter-spacing: 1px;
+    text-transform: uppercase; line-height: 1.4; background: var(--orange-pale);
+  }
+  .brand-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--blue-deep), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .brand-tagline { font-size: 10px; color: var(--text-lt); letter-spacing: 2px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2px; margin-left: auto; }
+  .nav-links a {
+    padding: 10px 14px; font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-md); text-decoration: none; border-radius: 6px; transition: all .2s;
+  }
+  .nav-links a:hover { color: var(--blue); background: var(--blue-pale); }
+  .nav-cta {
+    margin-left: 12px; padding: 10px 22px;
+    background: linear-gradient(135deg, var(--red), var(--orange-lt));
+    color: #fff; font-weight: 700; font-size: 13px;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: none; border-radius: 8px; cursor: pointer;
+    text-decoration: none; transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 16px rgba(232,92,0,.3);
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,92,0,.45); }
+
+  /* HERO */
+  .hero {
+    min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 70px 5% 60px; gap: 60px;
+    position: relative; overflow: hidden; background: var(--bg2);
+  }
+  .hero::before {
+    content: ''; position: absolute; right: -180px; top: -180px;
+    width: 620px; height: 620px;
+    background: radial-gradient(circle, rgba(74,122,255,.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: ''; position: absolute; left: 20%; bottom: -80px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(232,92,0,.09) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--red-pale); border: 1px solid var(--red);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: var(--red); text-transform: uppercase; margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; color: var(--red-lt); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(50px, 7vw, 94px);
+    line-height: .95; letter-spacing: 2px; margin-bottom: 22px;
+  }
+  .hero-title .line-blue  { color: var(--blue-deep); display: block; }
+  .hero-title .line-dark  { color: var(--text); display: block; }
+  .hero-title .line-grad  {
+    display: block;
+    background: linear-gradient(90deg, var(--orange), var(--red));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub { font-size: 17px; color: var(--text-md); line-height: 1.75; max-width: 480px; margin-bottom: 36px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-lt));
+    color: #fff; font-weight: 700; font-size: 14px;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: none; border-radius: 10px; cursor: pointer;
+    text-decoration: none; transition: all .25s;
+    box-shadow: 0 6px 20px rgba(13,43,142,.3);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(13,43,142,.45); }
+  .btn-outline {
+    padding: 14px 32px; background: transparent;
+    color: var(--orange); font-weight: 700; font-size: 14px;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: 2px solid var(--orange); border-radius: 10px; cursor: pointer;
+    text-decoration: none; transition: all .25s;
+  }
+  .btn-outline:hover { background: var(--orange-pale); transform: translateY(-3px); }
+  .hero-stats { display: flex; gap: 28px; margin-top: 48px; }
+  .stat { text-align: left; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 40px; font-weight: 800;
+    background: linear-gradient(90deg, var(--blue-deep), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 12px; color: var(--text-lt); letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .hero-card {
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px;
+    padding: 28px 20px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; text-align: center; transition: all .3s;
+  }
+  .hero-card:hover { border-color: var(--blue-lt); background: var(--blue-pale); transform: translateY(-4px); box-shadow: 0 10px 28px rgba(74,122,255,.15); }
+  .hero-card.featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--blue-pale), var(--orange-pale));
+    border-color: rgba(232,92,0,.35);
+  }
+  .hero-card.featured:hover { border-color: var(--orange); box-shadow: 0 10px 28px rgba(232,92,0,.18); }
+  .hero-icon { font-size: 42px; }
+  .hero-card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
+  .hero-card-sub { font-size: 12px; color: var(--text-lt); }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--blue-deep); padding: 13px 0; overflow: hidden;
+    border-top: 3px solid var(--orange); border-bottom: 3px solid var(--orange);
+  }
+  .marquee-inner { display: flex; white-space: nowrap; animation: marquee 28s linear infinite; }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .marquee-item {
+    padding: 0 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #fff;
+  }
+  .marquee-item::after { content: ' ◆ '; opacity: .4; color: var(--orange-lt); }
+
+  /* SECTIONS */
+  section { padding: 88px 5%; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
+  }
+  .section-label::before { content: ''; width: 28px; height: 2px; background: var(--orange); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(34px, 5vw, 60px); letter-spacing: 2px; line-height: 1; margin-bottom: 14px; color: var(--text);
+  }
+  .section-title span {
+    background: linear-gradient(90deg, var(--blue), var(--orange-lt));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-sub { color: var(--text-lt); font-size: 16px; max-width: 560px; line-height: 1.75; margin-bottom: 50px; }
+
+  /* CATEGORIES */
+  .categories { background: var(--bg); }
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .cat-card {
+    position: relative; overflow: hidden;
+    background: var(--bg2); border: 1.5px solid var(--border); border-radius: 18px;
+    padding: 32px 16px 24px; text-align: center; cursor: pointer;
+    transition: all .3s; text-decoration: none; color: var(--text);
+    box-shadow: 0 2px 10px rgba(13,43,142,.05);
+  }
+  .cat-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--orange));
+    transform: scaleX(0); transition: transform .3s;
+  }
+  .cat-card:hover { transform: translateY(-6px); border-color: var(--blue-lt); box-shadow: 0 12px 32px rgba(13,43,142,.12); }
+  .cat-card:hover::after { transform: scaleX(1); }
+  .cat-card:hover .cat-icon { transform: scale(1.2); }
+  .cat-icon { font-size: 46px; margin-bottom: 12px; transition: transform .3s; display: block; }
+  .cat-name { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .cat-count { font-size: 12px; color: var(--text-lt); }
+
+  /* BRANDS */
+  .brands-section { background: var(--bg2); }
+  .brands-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(138px, 1fr)); gap: 12px; }
+  .brand-chip {
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 16px 10px; text-align: center;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 800; letter-spacing: 1px; color: var(--text-md);
+    transition: all .25s; cursor: default;
+  }
+  .brand-chip:hover { background: var(--blue-pale); border-color: var(--blue-lt); color: var(--blue-deep); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(13,43,142,.12); }
+
+  /* PRODUCTS */
+  .products-section { background: var(--bg); }
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+  .product-card {
+    background: var(--bg2); border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden;
+    transition: all .3s; cursor: pointer; box-shadow: 0 2px 12px rgba(13,43,142,.06);
+  }
+  .product-card:hover { transform: translateY(-6px); border-color: var(--blue-lt); box-shadow: 0 18px 40px rgba(13,43,142,.14); }
+  .product-img {
+    height: 175px; display: flex; align-items: center; justify-content: center; font-size: 70px;
+    background: linear-gradient(135deg, var(--blue-pale), var(--orange-pale));
+  }
+  .product-info { padding: 18px; }
+  .product-tag {
+    display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 100px;
+    background: var(--orange-pale); color: var(--orange); margin-bottom: 8px;
+  }
+  .product-tag.new { background: var(--red-pale); color: var(--red); }
+  .product-tag.hot { background: var(--blue-pale); color: var(--blue); }
+  .product-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: .5px; margin-bottom: 4px; color: var(--text); }
+  .product-brand { font-size: 12px; color: var(--text-lt); margin-bottom: 14px; }
+  .product-footer { display: flex; justify-content: flex-end; }
+  .product-btn {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-lt));
+    color: #fff; font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: none; border-radius: 8px; cursor: pointer; transition: all .2s;
+    box-shadow: 0 3px 10px rgba(13,43,142,.22);
+  }
+  .product-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(13,43,142,.35); }
+
+  /* WHY US */
+  .why-section {
+    background: var(--bg2); display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; padding: 90px 5%;
+  }
+  .why-features { display: flex; flex-direction: column; gap: 20px; }
+  .why-feat {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 22px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; transition: all .3s;
+  }
+  .why-feat:hover { border-color: var(--orange); background: var(--orange-pale); box-shadow: 0 8px 24px rgba(232,92,0,.1); }
+  .why-feat-icon {
+    width: 50px; height: 50px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--red), var(--orange-lt));
+    border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+  .why-feat h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 5px; color: var(--text); }
+  .why-feat p { font-size: 14px; color: var(--text-lt); line-height: 1.65; }
+  .why-visual {
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue));
+    border-radius: 24px; padding: 52px 42px; text-align: center;
+    color: #fff; position: relative; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(13,43,142,.22);
+  }
+  .why-visual::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 240px; height: 240px; background: rgba(255,255,255,.06); border-radius: 50%;
+  }
+  .why-visual::after {
+    content: ''; position: absolute; bottom: -40px; left: -40px;
+    width: 180px; height: 180px; background: rgba(232,92,0,.14); border-radius: 50%;
+  }
+  .why-big-icon { font-size: 88px; margin-bottom: 18px; position: relative; z-index: 1; }
+  .why-visual h2 { font-family: 'Bebas Neue', sans-serif; font-size: 44px; letter-spacing: 2px; margin-bottom: 12px; position: relative; z-index: 1; }
+  .why-visual p { color: rgba(255,255,255,.8); line-height: 1.7; position: relative; z-index: 1; }
+  .why-stats { margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  .why-stat { text-align: center; padding: 14px 20px; background: rgba(255,255,255,.1); border-radius: 12px; border: 1px solid rgba(255,255,255,.15); }
+  .why-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: #FFD580; }
+  .why-stat-lbl { font-size: 10px; color: rgba(255,255,255,.65); letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--bg); display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start; padding: 90px 5%;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-icon {
+    width: 48px; height: 48px; flex-shrink: 0;
+    background: var(--blue-pale); border: 1.5px solid var(--blue-lt);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .contact-item h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; color: var(--blue-deep); }
+  .contact-item p { font-size: 14px; color: var(--text-md); line-height: 1.65; }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-lt); }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--bg2); border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 11px 14px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 14px;
+    outline: none; transition: border .2s; resize: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue-lt); background: var(--blue-pale); }
+  .form-group select option { background: #fff; color: var(--text); }
+  .form-submit {
+    width: 100%; padding: 15px;
+    background: linear-gradient(135deg, var(--blue-deep), var(--orange));
+    color: #fff; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    border: none; border-radius: 12px; cursor: pointer;
+    transition: all .25s; box-shadow: 0 6px 20px rgba(13,43,142,.22); margin-top: 6px;
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(232,92,0,.35); }
+
+  /* DIVIDER */
+  .section-divider { height: 4px; background: linear-gradient(90deg, var(--blue-deep), var(--orange), var(--red), var(--blue-deep)); background-size: 300%; animation: gradShift 6s linear infinite; }
+
+  /* FOOTER */
+  footer { background: var(--blue-deep); color: rgba(255,255,255,.9); padding: 60px 5% 28px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 44px; }
+  .footer-brand-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 3px;
+    background: linear-gradient(90deg, #fff, var(--orange-lt));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .footer-brand-tag { font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .footer-brand p { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.75; max-width: 280px; }
+  .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange-lt); margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,.6); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.12); padding-top: 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px; color: rgba(255,255,255,.5);
+  }
+  .footer-bottom span { color: var(--orange-lt); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 48px; }
+    .hero-visual { display: none; }
+    .why-section, .contact-section { grid-template-columns: 1fr; gap: 48px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  🔥 NEW ARRIVALS: Samsung S26 Ultra &nbsp;·&nbsp; iPhone 17 &nbsp;·&nbsp; iPhone 17 Pro &nbsp;·&nbsp; Google Pixel 10 Pro;·&nbsp;|&nbsp; <span>Enquiries Welcome</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="176599722_551182032520106_1795797043615366198_n.jpg" alt="JSM Traders Logo" style="width: 54px; height: 54px; border: 2px dashed var(--orange); border-radius: 10px;">
+    <div>
+      <div class="brand-name">JSM TRADERS</div>
+      <div class="brand-tagline">Electronics Retail Seller</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#categories">Categories</a>
+    <a href="#brands">Brands</a>
+    <a href="#products">Products</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-cta">Get Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">Trusted Distributor Since 2021</div>
+    <h1 class="hero-title">
+      <span class="line-dark">YOUR COMPLETE</span>
+      <span class="line-blue">ELECTRONICS</span>
+      <span class="line-grad">POWERHOUSE</span>
+    </h1>
+    <p class="hero-sub">From the latest flagship smartphones to home appliances — JSM Traders brings you thousands of SKUs across all top brands at competitive pricing.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Browse Products</a>
+      <a href="#contact" class="btn-outline">Request Catalog</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5000+</div><div class="stat-label">SKUs</div></div>
+      <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Brands</div></div>
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card featured">
+      <span class="hero-icon">📱</span>
+      <div class="hero-card-title">Latest Smartphones</div>
+      <div class="hero-card-sub">All Flagship Launches — In Stock</div>
+    </div>
+    <div class="hero-card">
+      <span class="hero-icon">🎧</span>
+      <div class="hero-card-title">Audio</div>
+      <div class="hero-card-sub">Earphones & Speakers</div>
+    </div>
+    <div class="hero-card">
+      <span class="hero-icon">⌚</span>
+      <div class="hero-card-title">Wearables</div>
+      <div class="hero-card-sub">Smart Watches</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Samsung</span><span class="marquee-item">Apple</span><span class="marquee-item">OnePlus</span><span class="marquee-item">Xiaomi</span><span class="marquee-item">Realme</span><span class="marquee-item">Vivo</span><span class="marquee-item">OPPO</span><span class="marquee-item">Motorola</span><span class="marquee-item">Nokia</span><span class="marquee-item">LG</span><span class="marquee-item">Sony</span><span class="marquee-item">Panasonic</span><span class="marquee-item">Daikin</span><span class="marquee-item">Voltas</span><span class="marquee-item">boAt</span><span class="marquee-item">JBL</span>
+    <span class="marquee-item">Samsung</span><span class="marquee-item">Apple</span><span class="marquee-item">OnePlus</span><span class="marquee-item">Xiaomi</span><span class="marquee-item">Realme</span><span class="marquee-item">Vivo</span><span class="marquee-item">OPPO</span><span class="marquee-item">Motorola</span><span class="marquee-item">Nokia</span><span class="marquee-item">LG</span><span class="marquee-item">Sony</span><span class="marquee-item">Panasonic</span><span class="marquee-item">Daikin</span><span class="marquee-item">Voltas</span><span class="marquee-item">boAt</span><span class="marquee-item">JBL</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="reveal">
+    <div class="section-label">Our Range</div>
+    <h2 class="section-title">PRODUCT <span>CATEGORIES</span></h2>
+    <p class="section-sub">Thousands of SKUs across every major electronics segment — all under one roof.</p>
+  </div>
+  <div class="cat-grid reveal">
+    <a class="cat-card" href="#products"><span class="cat-icon">📱</span><div class="cat-name">Smartphones</div><div class="cat-count">All Brands & Ranges</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">🔌</span><div class="cat-name">Accessories</div><div class="cat-count">Cables, Chargers & More</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">🛡️</span><div class="cat-name">Phone Covers</div><div class="cat-count">Cases & Protectors</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">🔊</span><div class="cat-name">Speakers</div><div class="cat-count">Portable & Home</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">⌚</span><div class="cat-name">Smart Watches</div><div class="cat-count">Fitness & Premium</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">🎧</span><div class="cat-name">Earphones</div><div class="cat-count">TWS, Wired & Neckbands</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">❄️</span><div class="cat-name">Air Coolers</div><div class="cat-count">Desert & Personal</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">🌬️</span><div class="cat-name">Air Conditioners</div><div class="cat-count">Split & Window AC</div></a>
+    <a class="cat-card" href="#products"><span class="cat-icon">📺</span><div class="cat-name">Televisions</div><div class="cat-count">Smart, LED & OLED</div></a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BRANDS -->
+<section class="brands-section" id="brands">
+  <div class="reveal">
+    <div class="section-label">Brand Portfolio</div>
+    <h2 class="section-title">TOP <span>BRANDS</span></h2>
+    <p class="section-sub">Selling all leading global and Indian electronics brands.</p>
+  </div>
+  <div class="brands-grid reveal">
+    <div class="brand-chip">Samsung</div><div class="brand-chip">Apple</div>
+    <div class="brand-chip">OnePlus</div><div class="brand-chip">Xiaomi</div>
+    <div class="brand-chip">Realme</div><div class="brand-chip">Vivo</div>
+    <div class="brand-chip">OPPO</div><div class="brand-chip">Motorola</div>
+    <div class="brand-chip">Nokia</div><div class="brand-chip">Sony</div>
+    <div class="brand-chip">LG</div><div class="brand-chip">Panasonic</div>
+    <div class="brand-chip">boAt</div><div class="brand-chip">JBL</div>
+    <div class="brand-chip">Daikin</div><div class="brand-chip">Voltas</div>
+    <div class="brand-chip">Havells</div><div class="brand-chip">Noise</div>
+    <div class="brand-chip">Fire-Boltt</div><div class="brand-chip">Nothing</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FEATURED PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="reveal">
+    <div class="section-label">Highlights</div>
+    <h2 class="section-title">FEATURED <span>PRODUCTS</span></h2>
+    <p class="section-sub">Latest launches and best-selling SKUs — contact us for pricing & availability.</p>
+  </div>
+  <div class="products-grid reveal">
+    <div class="product-card">
+      <div class="product-img">📱</div>
+      <div class="product-info">
+        <span class="product-tag new">New Launch</span>
+        <div class="product-name">Galaxy S26 Ultra</div>
+        <div class="product-brand">Samsung · 512GB</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">📱</div>
+      <div class="product-info">
+        <span class="product-tag new">New Launch</span>
+        <div class="product-name">iPhone 17 Pro</div>
+        <div class="product-brand">Apple · 512GB</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">📱</div>
+      <div class="product-info">
+        <span class="product-tag">Bestseller</span>
+        <div class="product-name">OnePlus 13</div>
+        <div class="product-brand">OnePlus · 256GB</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">🎧</div>
+      <div class="product-info">
+        <span class="product-tag hot">Hot</span>
+        <div class="product-name">Airdopes 141</div>
+        <div class="product-brand">boAt · TWS Earbuds</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">⌚</div>
+      <div class="product-info">
+        <span class="product-tag">Trending</span>
+        <div class="product-name">Galaxy Watch 7</div>
+        <div class="product-brand">Samsung · Smart Watch</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">📺</div>
+      <div class="product-info">
+        <span class="product-tag hot">Hot</span>
+        <div class="product-name">BRAVIA XR 65"</div>
+        <div class="product-brand">Sony · 4K OLED</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">❄️</div>
+      <div class="product-info">
+        <span class="product-tag">Seasonal</span>
+        <div class="product-name">1.5 Ton Inverter AC</div>
+        <div class="product-brand">Daikin · 5 Star Split</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">🔊</div>
+      <div class="product-info">
+        <span class="product-tag">Popular</span>
+        <div class="product-name">Charge 6</div>
+        <div class="product-brand">JBL · Portable Speaker</div>
+        <div class="product-footer"><button class="product-btn">Enquire</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section" id="why">
+  <div class="reveal">
+    <div class="section-label">Why JSM</div>
+    <h2 class="section-title">THE <span>DISTRIBUTOR</span><br>ADVANTAGE</h2>
+    <p class="section-sub">Retailers and resellers across the region trust JSM Traders for reliability, range, and speed.</p>
+      <div class="why-feat">
+        <div class="why-feat-icon">💰</div>
+        <div><h3>Competitive Pricing</h3><p>Distributor-level rates with tiered pricing for bulk orders. Best margins for your business.</p></div>
+      </div>
+      <div class="why-feat">
+        <div class="why-feat-icon">✅</div>
+        <div><h3>Genuine Products</h3><p>100% authentic, manufacturer-warranted products. No grey market, no compromise.</p></div>
+      </div>
+      <div class="why-feat">
+        <div class="why-feat-icon">📦</div>
+        <div><h3>Wide SKU Range</h3><p>5000+ SKUs spanning 9 categories and 20+ brands. One source for all your needs.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="why-visual reveal">
+    <div class="why-big-icon">🏪</div>
+    <h2>JSM TRADERS</h2>
+    <p>Your one-stop electronics distribution partner — serving retailers, wholesalers, and resellers across India since 2021.</p>
+    <div class="why-stats">
+      <div class="why-stat"><div class="why-stat-num">5+</div><div class="why-stat-lbl">Years</div></div>
+      <div class="why-stat"><div class="why-stat-num">5000+</div><div class="why-stat-lbl">SKUs</div></div>
+      <div class="why-stat"><div class="why-stat-num">1000+</div><div class="why-stat-lbl">Retailers</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="reveal">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">CONTACT <span>US</span></h2>
+    <p class="section-sub">Reach out for pricing, bulk orders or product availability.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div><h4>Address</h4><p>JSM Traders, Stadium Market,<br>Ratlam, Madhya Pradesh – 457001</p></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div><h4>Phone / WhatsApp</h4><p>+91 8989606605<br>Mon–Sat, 10 AM – 10 PM</p></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div><h4>Email</h4><p>jsmtradersrtm@gmail.coms</p></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏦</div>
+        <div><h4>GST / Trade</h4><p>GST No: 23DCIPP0367L1ZC<br>Authorised dealer– all brands</p></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📷</div>
+        <div><h4>Instagram</h4><p>@jsm_traders<br><a href="https://www.instagram.com/jsm_traders?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Follow us</a></p></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Business / Shop Name</label>
+        <input type="text" placeholder="Your business name">
+      </div>
+      <div class="form-group">
+        <label>Enquiry Category</label>
+        <select>
+          <option>Smartphones</option>
+          <option>Phone Accessories</option>
+          <option>Phone Covers</option>
+          <option>Speakers</option>
+          <option>Smart Watches</option>
+          <option>Earphones</option>
+          <option>Air Coolers</option>
+          <option>Air Conditioners</option>
+          <option>Televisions</option>
+          <option>Mixed / Bulk Order</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea rows="4" placeholder="Describe your requirement, quantity, or specific models..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Thank you! Our team will contact you shortly.')">Send Enquiry →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+        <div class="logo-placeholder" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.45);">📷<br>LOGO</div>
+        <div>
+          <div class="footer-brand-name">JSM TRADERS</div>
+          <div class="footer-brand-tag">Electronics Distributor</div>
+        </div>
+      </div>
+      <p>India's trusted electronics distributor — 5000+ SKUs across phones, accessories, wearables, audio & home appliances.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <a href="#">Smartphones</a><a href="#">Accessories</a><a href="#">Phone Covers</a>
+      <a href="#">Speakers</a><a href="#">Smart Watches</a><a href="#">Earphones</a>
+      <a href="#">Air Coolers</a><a href="#">ACs & TVs</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a><a href="#">Our Brands</a><a href="#">Become Reseller</a>
+      <a href="#">Bulk Orders</a><a href="#">Download Catalogue</a><a href="#">Terms & Conditions</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="#">WhatsApp Us</a><a href="#">Call Sales Team</a>
+      <a href="#">Email Enquiry</a><a href="#">Visit Our Store</a>
+      <a href="https://www.instagram.com/jsm_traders?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a><a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 <span>JSM Traders</span>. All rights reserved. | Indore, MP</div>
+    <div>Designed with ❤️ for <span>Electronics Retail</span></div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.cat-grid.reveal, .brands-grid.reveal, .products-grid.reveal').forEach(grid => {
+    grid.querySelectorAll(':scope > *').forEach((child, i) => {
+      child.style.transitionDelay = (i * 0.055) + 's';
+    });
+  });
+
+  document.querySelectorAll('.product-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
